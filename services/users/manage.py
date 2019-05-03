@@ -3,12 +3,6 @@
 import unittest
 import coverage
 
-from flask.cli import FlaskGroup
-
-from project import create_app, db  # nuevo
-from project.api.models import User  # nuevo
-
-
 COV = coverage.coverage(
     branch=True,
     include='project/*',
@@ -18,6 +12,14 @@ COV = coverage.coverage(
     ]
 )
 COV.start()
+
+
+from flask.cli import FlaskGroup
+
+from project import create_app, db  # nuevo
+from project.api.models import User  # nuevo
+
+ 
 
 app = create_app()  # nuevo
 cli = FlaskGroup(create_app=create_app)  # nuevo
