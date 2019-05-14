@@ -111,7 +111,6 @@ class TestUserService(BaseTestCase):
             self.assertIn('sindyepiquien@upeu.edu.pe', data['data']['email'])
             self.assertIn('success', data['status'])
 
-    
     def test_single_user_no_id(self):
         """Asegurando que se produce un error si no se ha proveido el id."""
         with self.client:
