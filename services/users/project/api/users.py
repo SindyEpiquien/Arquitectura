@@ -19,15 +19,7 @@ def ping_pong():
         'message': 'pong!'
     })
 
-# @users_blueprint.route('/', methods=['GET'])
-# def index():
-#     return render_template('index.html')
-#
-# @users_blueprint.route('/', methods=['GET'])
-# def index():
-#     users = User.query.all()
-#     return render_template('index.html', users=users)
-#
+
 @users_blueprint.route('/', methods=['GET', 'POST'])
 def index():
     if request.method == 'POST':
@@ -38,19 +30,7 @@ def index():
     users = User.query.all()
     return render_template('index.html', users=users)
 
-# @users_blueprint.route('/users', methods=['POST'])
-# def add_user():
-#     post_data = request.get_json()
-#     username = post_data.get('username')
-#     email = post_data.get('email')
-#     db.session.add(User(username=username, email=email))
-#     db.session.commit()
-#     response_object = {
-#         'status': 'success',
-#         'message': f'{email} ha sido agregado!'
-#     }
-#     return jsonify(response_object), 201
-#
+
 @users_blueprint.route('/users', methods=['POST'])
 def add_user():
     post_data = request.get_json()
@@ -77,20 +57,7 @@ def add_user():
         db.session.rollback()
         return jsonify(response_object), 400
 
-# @users_blueprint.route('/users/<user_id>', methods=['GET'])
-# def get_single_user(user_id):
-#     """Obteniendo detalles de un único usuario"""
-#     user = User.query.filter_by(id=user_id).first()
-#     response_object = {
-#         'status': 'success',
-#         'data': {
-#             'id': user.id,
-#             'username': user.username,
-#             'email': user.email,
-#             'active': user.active
-#         }
-#     }
-#     return jsonify(response_object), 200
+
 @users_blueprint.route('/users/<user_id>', methods=['GET'])
 def get_single_user(user_id):
     """Obteniendo detalles de un usuario único"""
