@@ -111,19 +111,7 @@ class TestUserService(BaseTestCase):
             self.assertIn('sindyepiquien@upeu.edu.pe', data['data']['email'])
             self.assertIn('success', data['status'])
 
-    # def test_single_user(self):
-    #     """Asegurando que un usuario único se comporte correctamente."""
-    #     user = User(username='abel', email='abel.huanca@upeu.edu.pe')
-    #abel     db.session.add(user)
-    #     db.session.commit()
-    #     with self.client:
-    #         response = self.client.get(f'/users/{user.id}')
-    #         data = json.loads(response.data.decode())
-    #         self.assertEqual(response.status_code, 200)
-    #         self.assertIn('abel', data['data']['username'])
-    #         self.assertIn('abel.huanca@upeu.edu.pe', data['data']['email'])
-    #         self.assertIn('success', data['status'])
-    #
+    
     def test_single_user_no_id(self):
         """Asegurando que se produce un error si no se ha proveido el id."""
         with self.client:
