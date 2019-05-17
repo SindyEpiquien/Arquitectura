@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';  // nuevo
-import UsersList from './components/UsersList';
+import UsersList from './component/UsersList';
  
  
 class App extends Component {
