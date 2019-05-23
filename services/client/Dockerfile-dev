@@ -1,0 +1,17 @@
+# image base
+FROM node:11.12.0-alpine
+
+# estableciendo directorio de trabajo
+WORKDIR /usr/src/app
+
+# copiar `/usr/src/app/node_modules/.bin` to $PATH
+ENV PATH /usr/src/app/node_modules/.bin:$PATH
+
+# instalar y cachear las dependencias de la app
+COPY package.json /usr/src/app/package.json
+COPY package-lock.json /usr/src/app/package-lock.json
+RUN npm ci
+RUN npm install react-scripts@2.1.8 -g --silent
+ 
+# iniciando app
+CMD ["npm", "start"]
