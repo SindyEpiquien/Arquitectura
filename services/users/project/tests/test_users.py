@@ -35,7 +35,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'sindy',
-                    'email': 'sindyepiquien@upeu.edu.pe'
+                    'email': 'sindyepiquien@upeu.edu.pe',
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json',
             )
@@ -83,7 +84,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'sindy',
-                    'email': 'sindyepiquien@upeu.edu.pe'
+                    'email': 'sindyepiquien@upeu.edu.pe',
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json',
             )
@@ -91,7 +93,8 @@ class TestUserService(BaseTestCase):
                 '/users',
                 data=json.dumps({
                     'username': 'sindy',
-                    'email': 'sindyepiquien@upeu.edu.pe'
+                    'email': 'sindyepiquien@upeu.edu.pe',
+                    'password': 'greaterthaneight'
                 }),
                 content_type='application/json',
             )
@@ -103,7 +106,8 @@ class TestUserService(BaseTestCase):
 
     def test_single_user(self):
         """Asegurando que un usuario único se comporte correctamente."""
-        user = add_user('sindy', 'sindyepiquien@upeu.edu.pe')
+        user = add_user(
+            'sindy', 'sindyepiquien@upeu.edu.pe', 'greaterthaneight')
         with self.client:
             response = self.client.get(f'/users/{user.id}')
             data = json.loads(response.data.decode())
@@ -132,8 +136,8 @@ class TestUserService(BaseTestCase):
 
     def test_all_users(self):
         """Asegurando se obtenga a todos lus usuarios correctamente."""
-        add_user('sindy', 'sindyepiquien@upeu.edu.pe')
-        add_user('raquel', 'raquel@gmail.com')
+        add_user('sindy', 'sindyepiquien@upeu.edu.pe', 'greaterthaneight')
+        add_user('raquel', 'raquel@gmail.com', 'greaterthaneight')
         with self.client:
             response = self.client.get('/users')
             data = json.loads(response.data.decode())
@@ -158,8 +162,8 @@ class TestUserService(BaseTestCase):
     def test_main_with_users(self):
         """Asegurando que la runta principal funcione correctamente cuando un
         usuario es correctamente agregado a la base de datos."""
-        add_user('sindy', 'sindyepiquien@upeu.edu.pe')
-        add_user('raquel', 'raquel@gmail.com')
+        add_user('sindy', 'sindyepiquien@upeu.edu.pe', 'greaterthaneight')
+        add_user('raquel', 'raquel@gmail.com', 'greaterthaneight')
         with self.client:
             response = self.client.get('/')
             self.assertEqual(response.status_code, 200)
@@ -176,7 +180,10 @@ class TestUserService(BaseTestCase):
         with self.client:
             response = self.client.post(
                 '/',
-                data=dict(username='sindy', email='sindyepiquien@upeu.edu.pe'),
+                data=dict(
+                    username='sindy',
+                    email='sindyepiquien@upeu.edu.pe',
+                    password='greaterthaneight'),
                 follow_redirects=True
             )
             self.assertEqual(response.status_code, 200)
